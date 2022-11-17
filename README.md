@@ -3,18 +3,54 @@ This repository contains the code for the paper
 
 * [An asymptotically compatible meshfree quadrature rule for nonlocal problems with applications to peridynamics](https://www.sciencedirect.com/science/article/pii/S004578251830402X)
 
-There are three test problems: static bond-based peridynamics, static nonlocal diffusion, and Kalthoff-Winkler experiment. All the problems are in two-dimensional space.
+There are five test problems: static nonlocal diffusion(converge to nonlocal limit), static nonlocal diffusion(converge to local limit), dynamic nonlocal diffusion, static bond-based peridynamics, and Kalthoff-Winkler experiment. The first four problems focus on heterogeneous materials. For KW experiment we're interested in homogeneous case. All the problems are in two-dimensional physical space.
 
 # Requirements
 * gcc 7.5.0 or newer
 * Install BLAS and LAPACK packages, you may need to change Makefile to direct to BLAS and LAPACK libraries.
 
 # Files
-* PMB_2Dweight.cpp is the code for the static bond-based peridynamics with Dirichlet boundary condition.
+* nonlocaldiff_static_nonlocal.cpp is the code for the static nonlocal diffusion problem with Dirichlet boundary condition, converging to nonlocal limit.
+* nonlocaldiff_static.cpp is the code for the static nonlocal diffusion problem with Dirichlet boundary condition, converging to local limit. 
 * nonlocaldiff.cpp is the code for the dynamic nonlocal diffusion problem with Dirichlet boundary condition and backward Euler scheme.
+* PMB_2Dweight.cpp is the code for the static bond-based peridynamics with Dirichlet boundary condition.
 * KW_2Dweight_dynamic.cpp is the code for the Kalthoff-Winkler experiment simulation.
 
 # Quick start
+
+## static nonlocal diffusion problems (converging to nonlocal limit)
+
+compile the run code with the following command:
+
+1. make Nldiffnl
+2. ./nldiffnl.ex \<number of particles\>\<ratio of delta/h\>\<poly order\>
+
+Example:
+
+./nldiffnl.ex 20 3.5 2
+
+## static nonlocal diffusion problems (converging to local limit)
+
+compile the run code with the following command:
+
+1. make Nldiff
+2. ./nldiff.ex \<number of particles\>\<ratio of delta/h\>\<poly order\>
+
+Example:
+
+./nldiff.ex 20 3.5 2
+
+## dynamic nonlocal diffusion problems
+
+compile the run code with the following command:
+
+1. make Nldiffd
+2. ./nldiffd.ex \<number of particles\>\<ratio of delta/h\>
+
+Example:
+
+./nldiff.ex 20 3.5 
+
 ## static bond-based peridynamics
 
 compile the run code with the following command:
@@ -25,17 +61,6 @@ compile the run code with the following command:
 Example:
 
 ./PMB_2d.ex 20 3.5 0.0
-
-## Nonlocal diffusion problems
-
-compile the run code with the following command:
-
-1. make Nldiff
-2. ./nldiff.ex \<number of particles\>\<ratio of delta/h\>
-
-Example:
-
-./nldiff.ex 20 3.5 
 
 ## Kalthoff-Winkler experiment
 
